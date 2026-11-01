@@ -974,7 +974,6 @@
       </section>
     </main>
 
-
     <footer class="page-footer">
       &copy; <span id="currentYear"></span> LapStore. Shop smarter, every day.
     </footer>
@@ -995,7 +994,6 @@
 
         const password = document.getElementById("password").value;
 
-    
         if (!email || !password) {
           Swal.fire({
             icon: "warning",
@@ -1008,7 +1006,6 @@
           return;
         }
 
-      
         let users = [];
 
         try {
@@ -1029,7 +1026,6 @@
           return;
         }
 
-        
         const emailUser = users.find(function (user) {
           return (
             user &&
@@ -1038,7 +1034,6 @@
           );
         });
 
-      
         const passwordExists = users.some(function (user) {
           return user && user.password === password;
         });
@@ -1067,7 +1062,6 @@
           return;
         }
 
-        
         if (emailUser.password !== password) {
           Swal.fire({
             icon: "error",
@@ -1090,10 +1084,7 @@
           }),
         );
 
-      
         sessionStorage.setItem("isLoggedIn", "true");
-
-   l
         Swal.fire({
           icon: "success",
           title: "Login Successful!",
@@ -1108,7 +1099,6 @@
         });
       });
 
-   
       function togglePassword() {
         const passwordInput = document.getElementById("password");
         const eyeIcon = document.getElementById("eyeIcon");
