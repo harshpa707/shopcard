@@ -1,0 +1,1131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome Back - Laptop Store</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --text-dark: #172554;
+        --text-muted: #64748b;
+        --border: #e2e8f0;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f8faff;
+        color: var(--text-dark);
+      }
+
+      /* Navbar */
+      .shop-navbar {
+        width: 100%;
+        min-height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 15px 6%;
+        background: #ffffff;
+        border-bottom: 1px solid #eaf0fb;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--text-dark);
+        text-decoration: none;
+        font-size: 25px;
+        font-weight: 800;
+        letter-spacing: -0.8px;
+        white-space: nowrap;
+      }
+
+      .brand-icon {
+        width: 43px;
+        height: 43px;
+        display: grid;
+        place-items: center;
+        color: #ffffff;
+        background: linear-gradient(135deg, #60a5fa, #2563eb);
+        border-radius: 13px;
+        font-size: 23px;
+        box-shadow: 0 6px 14px rgba(37, 99, 235, 0.2);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 27px;
+      }
+
+      .nav-links a {
+        color: #475569;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      .register-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 11px 17px;
+        border: 1px solid #dbeafe;
+        border-radius: 10px;
+        color: var(--primary);
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: 0.2s ease;
+      }
+
+      .register-link:hover {
+        background: #eff6ff;
+        border-color: #bfdbfe;
+      }
+
+      /* Main Layout */
+      .login-page {
+        width: 100%;
+        min-height: calc(100vh - 76px);
+        display: grid;
+        grid-template-columns: 1fr 0.9fr;
+        align-items: stretch;
+      }
+
+      /* Left Shopping Panel */
+      .shopping-panel {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 55px 7%;
+        background:
+          radial-gradient(
+            circle at 85% 20%,
+            rgba(255, 255, 255, 0.8) 0,
+            transparent 22%
+          ),
+          linear-gradient(145deg, #dbeafe 0%, #eff6ff 50%, #bfdbfe 100%);
+      }
+
+      .shopping-panel::before {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        top: -120px;
+        right: -110px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.45);
+      }
+
+      .shopping-panel::after {
+        content: "";
+        position: absolute;
+        width: 340px;
+        height: 340px;
+        bottom: -200px;
+        left: -120px;
+        border-radius: 50%;
+        background: rgba(59, 130, 246, 0.12);
+      }
+
+      .panel-content {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 570px;
+        margin: 0 auto;
+      }
+
+      .offer-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 14px;
+        margin-bottom: 23px;
+        border: 1px solid rgba(37, 99, 235, 0.12);
+        border-radius: 30px;
+        background: rgba(255, 255, 255, 0.72);
+        color: #1d4ed8;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .offer-badge i {
+        font-size: 15px;
+      }
+
+      .panel-title {
+        max-width: 480px;
+        margin-bottom: 17px;
+        color: #172554;
+        font-size: clamp(34px, 4vw, 52px);
+        line-height: 1.13;
+        font-weight: 800;
+        letter-spacing: -1.8px;
+      }
+
+      .panel-title span {
+        color: var(--primary);
+      }
+
+      .panel-description {
+        max-width: 440px;
+        margin-bottom: 28px;
+        color: #526581;
+        font-size: 15px;
+        line-height: 1.8;
+      }
+
+      /* Laptop Illustration */
+      .laptop-scene {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 245px;
+        margin: 5px 0 24px;
+      }
+
+      .laptop-orbit {
+        position: absolute;
+        width: 245px;
+        height: 245px;
+        border: 1px dashed rgba(37, 99, 235, 0.25);
+        border-radius: 50%;
+      }
+
+      .laptop-circle {
+        position: absolute;
+        width: 190px;
+        height: 190px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+      }
+
+      .laptop-illustration {
+        position: relative;
+        z-index: 2;
+        width: 240px;
+        text-align: center;
+        transform: rotate(-5deg);
+      }
+
+      .laptop-screen {
+        position: relative;
+        min-height: 155px;
+        padding: 15px;
+        border: 9px solid #1e293b;
+        border-bottom-width: 12px;
+        border-radius: 12px 12px 5px 5px;
+        background: linear-gradient(135deg, #ffffff, #dbeafe);
+        box-shadow: 0 15px 30px rgba(30, 41, 59, 0.15);
+      }
+
+      .screen-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+
+      .screen-logo {
+        color: var(--primary);
+        font-size: 11px;
+        font-weight: 800;
+      }
+
+      .screen-search {
+        width: 80px;
+        height: 8px;
+        border-radius: 10px;
+        background: #dbeafe;
+      }
+
+      .product-mini-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .mini-product {
+        min-height: 68px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        padding: 6px 3px;
+        border-radius: 7px;
+        background: #ffffff;
+      }
+
+      .mini-product i {
+        color: #2563eb;
+        font-size: 25px;
+      }
+
+      .mini-product span {
+        color: #64748b;
+        font-size: 8px;
+        font-weight: 700;
+      }
+
+      .laptop-base {
+        width: 112%;
+        height: 12px;
+        margin-left: -6%;
+        border-radius: 2px 2px 12px 12px;
+        background: linear-gradient(#cbd5e1, #94a3b8);
+        box-shadow: 0 14px 17px rgba(30, 41, 59, 0.15);
+      }
+
+      .floating-cart {
+        position: absolute;
+        z-index: 3;
+        top: 20px;
+        right: 7%;
+        width: 56px;
+        height: 56px;
+        display: grid;
+        place-items: center;
+        border: 1px solid #ffffff;
+        border-radius: 17px;
+        background: #ffffff;
+        color: #2563eb;
+        font-size: 25px;
+        box-shadow: 0 10px 24px rgba(37, 99, 235, 0.13);
+        transform: rotate(8deg);
+      }
+
+      .floating-box {
+        position: absolute;
+        z-index: 3;
+        left: 7%;
+        bottom: 20px;
+        width: 52px;
+        height: 52px;
+        display: grid;
+        place-items: center;
+        border: 1px solid #ffffff;
+        border-radius: 16px;
+        background: #ffffff;
+        color: #0d9488;
+        font-size: 24px;
+        box-shadow: 0 10px 24px rgba(37, 99, 235, 0.12);
+        transform: rotate(-8deg);
+      }
+
+      /* Shopping Benefits */
+      .shopping-benefits {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 5px;
+      }
+
+      .benefit {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 11px 13px;
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        border-radius: 11px;
+        background: rgba(255, 255, 255, 0.65);
+        color: #334e78;
+        font-size: 12px;
+        font-weight: 650;
+      }
+
+      .benefit i {
+        color: var(--primary);
+        font-size: 16px;
+      }
+
+      /* Right Login Section */
+      .login-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 45px 8%;
+        background: #f8faff;
+      }
+
+      .login-wrapper {
+        width: 100%;
+        max-width: 420px;
+        margin: auto;
+      }
+
+      .login-card {
+        width: 100%;
+        padding: 38px 34px;
+        border: 1px solid #edf1f8;
+        border-radius: 20px;
+        background: #ffffff;
+        box-shadow: 0 18px 50px rgba(30, 64, 175, 0.08);
+      }
+
+      .mobile-brand {
+        display: none;
+        justify-content: center;
+        margin-bottom: 26px;
+      }
+
+      .login-title {
+        margin-bottom: 9px;
+        color: #172554;
+        font-size: 29px;
+        font-weight: 800;
+        text-align: center;
+        letter-spacing: -0.8px;
+      }
+
+      .login-subtitle {
+        margin-bottom: 30px;
+        color: #8491a7;
+        font-size: 13px;
+        line-height: 1.7;
+        text-align: center;
+      }
+
+      /* Form */
+      .field-group {
+        margin-bottom: 20px;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        color: #334155;
+        font-size: 13px;
+        font-weight: 650;
+      }
+
+      .input-group {
+        min-height: 49px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: #f8fafc;
+        transition: 0.2s ease;
+      }
+
+      .input-group:focus-within {
+        border-color: #60a5fa;
+        background: #ffffff;
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+      }
+
+      .input-group-text {
+        min-width: 46px;
+        justify-content: center;
+        border: none;
+        background: transparent;
+        color: #3b82f6;
+        font-size: 16px;
+      }
+
+      .form-control {
+        min-height: 47px;
+        border: none;
+        background: transparent;
+        box-shadow: none !important;
+        color: #334155;
+        font-size: 13px;
+      }
+
+      .form-control::placeholder {
+        color: #94a3b8;
+        opacity: 1;
+      }
+
+      .form-control:focus {
+        background: transparent;
+      }
+
+      .password-toggle {
+        min-width: 44px;
+        border: none;
+        background: transparent;
+        color: #94a3b8;
+        cursor: pointer;
+        transition: color 0.2s ease;
+      }
+
+      .password-toggle:hover {
+        color: var(--primary);
+      }
+
+      /* Sign In Button */
+      .signin-btn {
+        width: 100%;
+        min-height: 49px;
+        margin-top: 4px;
+        border: none;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 700;
+        box-shadow: 0 8px 18px rgba(37, 99, 235, 0.2);
+        transition: 0.2s ease;
+      }
+
+      .signin-btn:hover {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        color: #ffffff;
+        transform: translateY(-1px);
+        box-shadow: 0 11px 22px rgba(37, 99, 235, 0.25);
+      }
+
+      .signin-btn:active {
+        transform: translateY(0);
+      }
+
+      /* Register Prompt */
+      .register-prompt {
+        margin: 25px 0 0;
+        color: #8491a7;
+        font-size: 13px;
+        line-height: 1.8;
+        text-align: center;
+      }
+
+      .register-prompt a {
+        color: var(--primary);
+        font-weight: 750;
+        text-decoration: none;
+      }
+
+      .register-prompt a:hover {
+        color: var(--primary-dark);
+        text-decoration: underline;
+      }
+
+      .secure-note {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 7px;
+        margin-top: 22px;
+        color: #94a3b8;
+        font-size: 11px;
+      }
+
+      .secure-note i {
+        color: #16a34a;
+      }
+
+      /* Footer */
+      .page-footer {
+        padding: 15px;
+        background: #ffffff;
+        color: #94a3b8;
+        font-size: 11px;
+        text-align: center;
+        border-top: 1px solid #edf1f8;
+      }
+
+      /* Responsive */
+      @media (max-width: 1050px) {
+        .shop-navbar {
+          padding-right: 4%;
+          padding-left: 4%;
+        }
+
+        .nav-links {
+          gap: 16px;
+        }
+
+        .shopping-panel {
+          padding: 45px 6%;
+        }
+
+        .login-section {
+          padding: 35px 5%;
+        }
+
+        .login-card {
+          padding: 32px 25px;
+        }
+      }
+
+      @media (max-width: 800px) {
+        .shop-navbar {
+          min-height: 70px;
+          flex-wrap: wrap;
+          gap: 12px;
+        }
+
+        .brand {
+          font-size: 22px;
+        }
+
+        .brand-icon {
+          width: 39px;
+          height: 39px;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .login-page {
+          grid-template-columns: 1fr;
+        }
+
+        .shopping-panel {
+          padding: 35px 22px 25px;
+          text-align: center;
+        }
+
+        .panel-content {
+          max-width: 550px;
+        }
+
+        .offer-badge {
+          margin-bottom: 16px;
+        }
+
+        .panel-title {
+          max-width: 550px;
+          margin-right: auto;
+          margin-left: auto;
+          font-size: 37px;
+          letter-spacing: -1px;
+        }
+
+        .panel-description {
+          margin-right: auto;
+          margin-left: auto;
+          font-size: 14px;
+        }
+
+        .laptop-scene {
+          min-height: 220px;
+          margin: 0 auto 16px;
+          max-width: 430px;
+        }
+
+        .laptop-orbit {
+          width: 210px;
+          height: 210px;
+        }
+
+        .laptop-circle {
+          width: 165px;
+          height: 165px;
+        }
+
+        .shopping-benefits {
+          justify-content: center;
+        }
+
+        .login-section {
+          padding: 30px 18px 45px;
+        }
+
+        .login-wrapper {
+          max-width: 440px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .shop-navbar {
+          padding: 13px 16px;
+        }
+
+        .brand {
+          gap: 8px;
+          font-size: 20px;
+        }
+
+        .brand-icon {
+          width: 36px;
+          height: 36px;
+          font-size: 20px;
+        }
+
+        .register-link {
+          gap: 5px;
+          padding: 9px 11px;
+          font-size: 11px;
+        }
+
+        .shopping-panel {
+          padding: 30px 16px 24px;
+        }
+
+        .panel-title {
+          font-size: 32px;
+        }
+
+        .panel-description {
+          font-size: 13px;
+          line-height: 1.7;
+        }
+
+        .laptop-scene {
+          min-height: 190px;
+        }
+
+        .laptop-illustration {
+          width: 210px;
+        }
+
+        .laptop-screen {
+          min-height: 140px;
+          padding: 12px;
+        }
+
+        .mini-product {
+          min-height: 60px;
+        }
+
+        .mini-product i {
+          font-size: 21px;
+        }
+
+        .floating-cart,
+        .floating-box {
+          width: 43px;
+          height: 43px;
+          border-radius: 13px;
+          font-size: 20px;
+        }
+
+        .benefit {
+          padding: 9px 10px;
+          font-size: 11px;
+        }
+
+        .login-section {
+          padding: 24px 15px 35px;
+        }
+
+        .login-card {
+          padding: 27px 20px;
+          border-radius: 16px;
+        }
+
+        .login-title {
+          font-size: 26px;
+        }
+
+        .login-subtitle {
+          margin-bottom: 25px;
+          font-size: 12px;
+        }
+
+        .field-group {
+          margin-bottom: 17px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <header class="shop-navbar">
+      <a href="index.html" class="brand">
+        <span class="brand-icon">
+          <i class="bi bi-laptop"></i>
+        </span>
+        <span>Lap<span style="color: #2563eb">Store</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="products.html">Best Deals</a>
+      </nav>
+
+      <a href="register.html" class="register-link">
+        Create Account
+        <i class="bi bi-arrow-right"></i>
+      </a>
+    </header>
+
+    <!-- Main Login Page -->
+    <main class="login-page">
+      <!-- Left Shopping Panel -->
+      <section class="shopping-panel">
+        <div class="panel-content">
+          <div class="offer-badge">
+            <i class="bi bi-stars"></i>
+            Your next upgrade starts here
+          </div>
+
+          <h1 class="panel-title">
+            Welcome Back to <span>Better Shopping.</span>
+          </h1>
+
+          <p class="panel-description">
+            Sign in to explore laptops, discover great deals, and find the
+            perfect technology for your everyday needs.
+          </p>
+
+          <!-- CSS Laptop Illustration -->
+          <div class="laptop-scene">
+            <div class="laptop-orbit"></div>
+            <div class="laptop-circle"></div>
+
+            <div class="floating-cart">
+              <i class="bi bi-cart3"></i>
+            </div>
+
+            <div class="floating-box">
+              <i class="bi bi-box-seam"></i>
+            </div>
+
+            <div class="laptop-illustration">
+              <div class="laptop-screen">
+                <div class="screen-top">
+                  <span class="screen-logo">LapStore</span>
+                  <span class="screen-search"></span>
+                  <i
+                    class="bi bi-cart3"
+                    style="color: #2563eb; font-size: 12px"
+                  ></i>
+                </div>
+
+                <div class="product-mini-grid">
+                  <div class="mini-product">
+                    <i class="bi bi-laptop"></i>
+                    <span>Laptops</span>
+                  </div>
+
+                  <div class="mini-product">
+                    <i class="bi bi-headphones"></i>
+                    <span>Audio</span>
+                  </div>
+
+                  <div class="mini-product">
+                    <i class="bi bi-mouse"></i>
+                    <span>Accessories</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="laptop-base"></div>
+            </div>
+          </div>
+
+          <!-- Shopping Benefits -->
+          <div class="shopping-benefits">
+            <div class="benefit">
+              <i class="bi bi-truck"></i>
+              Fast Delivery
+            </div>
+
+            <div class="benefit">
+              <i class="bi bi-shield-check"></i>
+              Secure Shopping
+            </div>
+
+            <div class="benefit">
+              <i class="bi bi-tag"></i>
+              Great Deals
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Login Section -->
+      <section class="login-section">
+        <div class="login-wrapper">
+          <div class="login-card">
+            <div class="mobile-brand">
+              <a href="index.html" class="brand">
+                <span class="brand-icon">
+                  <i class="bi bi-laptop"></i>
+                </span>
+                <span>Lap<span style="color: #2563eb">Store</span></span>
+              </a>
+            </div>
+
+            <h2 class="login-title">Welcome Back!</h2>
+
+            <p class="login-subtitle">
+              Enter your credentials to access your account.
+            </p>
+
+            <form id="loginFrom">
+              <!-- Email -->
+              <div class="field-group">
+                <label for="email" class="form-label">Email Address</label>
+
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-envelope"></i>
+                  </span>
+
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    required
+                  />
+                </div>
+              </div>
+
+              <!-- Password -->
+              <div class="field-group">
+                <label for="password" class="form-label">Password</label>
+
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-lock"></i>
+                  </span>
+
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                  />
+
+                  <button
+                    type="button"
+                    class="password-toggle"
+                    onclick="togglePassword()"
+                    aria-label="Show password"
+                  >
+                    <i class="bi bi-eye-slash" id="eyeIcon"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Sign In -->
+              <button type="submit" class="btn signin-btn">
+                <i class="bi bi-box-arrow-in-right me-2"></i>
+                Sign In to Your Account
+              </button>
+
+              <p
+                id="message"
+                class="text-center mt-3 mb-0 small"
+                aria-live="polite"
+              ></p>
+            </form>
+
+            <p class="register-prompt">
+              New to LapStore?
+              <a href="register.html">Create an account</a>
+            </p>
+
+            <div class="secure-note">
+              <i class="bi bi-shield-lock-fill"></i>
+              Your shopping journey starts here.
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+
+    <footer class="page-footer">
+      &copy; <span id="currentYear"></span> LapStore. Shop smarter, every day.
+    </footer>
+
+    <script>
+      document.getElementById("currentYear").textContent =
+        new Date().getFullYear();
+
+      const loginForm = document.getElementById("loginFrom");
+
+      loginForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const email = document
+          .getElementById("email")
+          .value.trim()
+          .toLowerCase();
+
+        const password = document.getElementById("password").value;
+
+    
+        if (!email || !password) {
+          Swal.fire({
+            icon: "warning",
+            title: "Missing Details!",
+            text: "Please enter your email and password.",
+            confirmButtonText: "OK",
+            confirmButtonColor: "#2563eb",
+          });
+
+          return;
+        }
+
+      
+        let users = [];
+
+        try {
+          users = JSON.parse(localStorage.getItem("users") || "[]");
+
+          if (!Array.isArray(users)) {
+            throw new Error("Invalid user data");
+          }
+        } catch (error) {
+          Swal.fire({
+            icon: "error",
+            title: "Data Error!",
+            text: "Unable to read user data. Please register again.",
+            confirmButtonText: "OK",
+            confirmButtonColor: "#2563eb",
+          });
+
+          return;
+        }
+
+        
+        const emailUser = users.find(function (user) {
+          return (
+            user &&
+            typeof user.email === "string" &&
+            user.email.trim().toLowerCase() === email
+          );
+        });
+
+      
+        const passwordExists = users.some(function (user) {
+          return user && user.password === password;
+        });
+
+        if (!emailUser) {
+          if (passwordExists) {
+            Swal.fire({
+              icon: "error",
+              title: "Email Not Registered!",
+              text: "This email is not registered. Please enter your registered email or create an account.",
+              confirmButtonText: "OK",
+              confirmButtonColor: "#2563eb",
+            });
+          } else {
+            Swal.fire({
+              icon: "warning",
+              title: "Account Not Found!",
+              text: "Please register your account first.",
+              confirmButtonText: "Register",
+              confirmButtonColor: "#2563eb",
+            }).then(function () {
+              window.location.href = "register.html";
+            });
+          }
+
+          return;
+        }
+
+        
+        if (emailUser.password !== password) {
+          Swal.fire({
+            icon: "error",
+            title: "Wrong Password!",
+            text: "Please check your password and try again.",
+            confirmButtonText: "Try Again",
+            confirmButtonColor: "#2563eb",
+          });
+
+          return;
+        }
+
+        sessionStorage.setItem(
+          "loggedInUser",
+          JSON.stringify({
+            fullName: emailUser.fullName,
+            email: emailUser.email,
+            gender: emailUser.gender,
+            phone: emailUser.phone,
+          }),
+        );
+
+      
+        sessionStorage.setItem("isLoggedIn", "true");
+
+   l
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful!",
+          text: "Welcome back, " + (emailUser.fullName || "User") + "!",
+          confirmButtonText: "Continue",
+          confirmButtonColor: "#2563eb",
+          allowOutsideClick: false,
+        }).then(function (result) {
+          if (result.isConfirmed) {
+            window.location.href = "products.html";
+          }
+        });
+      });
+
+   
+      function togglePassword() {
+        const passwordInput = document.getElementById("password");
+        const eyeIcon = document.getElementById("eyeIcon");
+        const button = document.querySelector(".password-toggle");
+
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          eyeIcon.classList.remove("bi-eye-slash");
+          eyeIcon.classList.add("bi-eye");
+          button.setAttribute("aria-label", "Hide password");
+        } else {
+          passwordInput.type = "password";
+          eyeIcon.classList.remove("bi-eye");
+          eyeIcon.classList.add("bi-eye-slash");
+          button.setAttribute("aria-label", "Show password");
+        }
+      }
+    </script>
+  </body>
+</html>

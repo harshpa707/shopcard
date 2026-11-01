@@ -1,0 +1,2148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Shopcart | Laptop Store</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 90px;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #172033;
+        background: #ffffff;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      :root {
+        --primary: #4f46e5;
+        --primary-dark: #3730a3;
+        --dark: #111827;
+        --muted: #64748b;
+        --light-bg: #f7f8fc;
+        --border: #e8eaf0;
+        --radius: 16px;
+      }
+
+      .section-padding {
+        padding: 75px 0;
+      }
+
+      .section-heading {
+        font-size: clamp(26px, 3vw, 36px);
+        font-weight: 800;
+        letter-spacing: -1px;
+        margin-bottom: 10px;
+      }
+
+      .section-description {
+        color: var(--muted);
+        margin-bottom: 0;
+        line-height: 1.7;
+      }
+
+      .primary-btn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 9px;
+        background: var(--primary);
+        color: white;
+        padding: 13px 22px;
+        border: 1px solid var(--primary);
+        border-radius: 9px;
+        font-weight: 700;
+        transition: 0.25s;
+      }
+
+      .primary-btn:hover {
+        background: var(--primary-dark);
+        border-color: var(--primary-dark);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .outline-btn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        border: 1px solid #d8dbea;
+        border-radius: 9px;
+        color: var(--dark);
+        background: white;
+        font-weight: 700;
+        transition: 0.2s;
+      }
+
+      .outline-btn:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+
+      .announcement-bar {
+        background: var(--dark);
+        color: #ffffff;
+        text-align: center;
+        padding: 9px 12px;
+        font-size: 12px;
+        letter-spacing: 0.3px;
+      }
+
+      .announcement-bar strong {
+        color: #c4b5fd;
+      }
+      .main-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.97);
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(12px);
+      }
+
+      .navbar {
+        padding: 15px 0;
+      }
+
+      .brand-logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--dark);
+        font-size: 25px;
+        font-weight: 900;
+        letter-spacing: -1px;
+      }
+
+      .brand-logo:hover {
+        color: var(--primary);
+      }
+
+      .brand-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: var(--primary);
+        color: white;
+        font-size: 23px;
+      }
+
+      .brand-logo span:last-child {
+        color: var(--primary);
+      }
+
+      .navbar-nav {
+        gap: 5px;
+      }
+
+      .navbar-nav .nav-link {
+        color: #475569;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 10px 13px !important;
+        transition: 0.2s;
+      }
+
+      .navbar-nav .nav-link:hover,
+      .navbar-nav .nav-link.active {
+        color: var(--primary);
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .header-icon-btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: white;
+        color: var(--dark);
+        font-size: 19px;
+        transition: 0.2s;
+      }
+
+      .header-icon-btn:hover {
+        color: var(--primary);
+        border-color: var(--primary);
+      }
+
+      .cart-count {
+        position: absolute;
+        top: -7px;
+        right: -7px;
+        min-width: 20px;
+        height: 20px;
+        padding: 0 5px;
+        border-radius: 50px;
+        background: var(--primary);
+        color: white;
+        font-size: 11px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 700;
+      }
+
+      .login-link {
+        color: #334155;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .signup-btn {
+        background: var(--primary);
+        color: white;
+        border-radius: 9px;
+        padding: 11px 17px;
+        font-size: 13px;
+        font-weight: 700;
+        border: 1px solid var(--primary);
+        white-space: nowrap;
+      }
+
+      .signup-btn:hover {
+        color: white;
+        background: var(--primary-dark);
+      }
+      .hero-section {
+        padding: 60px 0 65px;
+        overflow: hidden;
+        background:
+          radial-gradient(
+            circle at 85% 30%,
+            rgba(129, 140, 248, 0.18),
+            transparent 35%
+          ),
+          linear-gradient(135deg, #f8faff 0%, #eef0ff 100%);
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 13px;
+        border: 1px solid #dddafe;
+        border-radius: 50px;
+        background: white;
+        color: var(--primary);
+        font-size: 12px;
+        font-weight: 800;
+        margin-bottom: 22px;
+      }
+
+      .hero-badge i {
+        font-size: 15px;
+      }
+
+      .hero-title {
+        font-size: clamp(38px, 5vw, 62px);
+        line-height: 1.1;
+        letter-spacing: -2.8px;
+        font-weight: 900;
+        color: var(--dark);
+        margin-bottom: 22px;
+      }
+
+      .hero-title .highlight {
+        color: var(--primary);
+      }
+
+      .hero-description {
+        max-width: 480px;
+        color: #64748b;
+        font-size: 16px;
+        line-height: 1.9;
+        margin-bottom: 28px;
+      }
+
+      .hero-buttons {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .hero-trust {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        flex-wrap: wrap;
+        margin-top: 32px;
+        color: #475569;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .hero-trust span {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      .hero-trust i {
+        color: #16a34a;
+        font-size: 16px;
+      }
+
+      .hero-image-wrapper {
+        position: relative;
+        padding: 25px;
+      }
+
+      .hero-image-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 24px;
+        background: white;
+        box-shadow: 0 25px 70px rgba(67, 56, 202, 0.13);
+        transform: rotate(-2deg);
+      }
+
+      .hero-image-card img {
+        display: block;
+        width: 100%;
+        height: 390px;
+        object-fit: cover;
+      }
+
+      .floating-price {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        background: white;
+        border-radius: 15px;
+        padding: 17px 20px;
+        box-shadow: 0 12px 35px rgba(15, 23, 42, 0.12);
+      }
+
+      .floating-price small {
+        display: block;
+        color: var(--muted);
+        font-size: 11px;
+        margin-bottom: 5px;
+      }
+
+      .floating-price strong {
+        font-size: 21px;
+        color: var(--primary);
+      }
+
+      .floating-discount {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 83px;
+        height: 83px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #f97316;
+        color: white;
+        border-radius: 50%;
+        font-size: 12px;
+        font-weight: 800;
+        transform: rotate(-10deg);
+        box-shadow: 0 10px 25px rgba(249, 115, 22, 0.22);
+      }
+
+      .floating-discount strong {
+        font-size: 24px;
+      }
+      .benefits-strip {
+        background: white;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .benefit-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 13px;
+        padding: 24px 10px;
+      }
+
+      .benefit-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 45px;
+        height: 45px;
+        flex-shrink: 0;
+        border-radius: 12px;
+        background: #eef2ff;
+        color: var(--primary);
+        font-size: 21px;
+      }
+
+      .benefit-item strong {
+        display: block;
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+
+      .benefit-item small {
+        display: block;
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .categories-section {
+        background: white;
+      }
+
+      .category-card {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        height: 100%;
+        padding: 20px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: white;
+        transition: 0.25s;
+      }
+
+      .category-card:hover {
+        border-color: #c7d2fe;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+        transform: translateY(-4px);
+      }
+
+      .category-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 65px;
+        height: 65px;
+        flex-shrink: 0;
+        background: #eef2ff;
+        border-radius: 14px;
+        color: var(--primary);
+        font-size: 30px;
+      }
+
+      .category-card:nth-child(2) .category-icon {
+        background: #fff7ed;
+        color: #ea580c;
+      }
+
+      .category-card h3 {
+        font-size: 16px;
+        font-weight: 800;
+        margin-bottom: 6px;
+      }
+
+      .category-card p {
+        color: var(--muted);
+        font-size: 12px;
+        margin: 0;
+      }
+
+      .category-card .category-arrow {
+        margin-left: auto;
+        color: #94a3b8;
+        font-size: 18px;
+      }
+      .products-section {
+        background: var(--light-bg);
+      }
+
+      .product-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+        margin: 27px 0 30px;
+      }
+
+      .filter-btn {
+        padding: 9px 17px;
+        border: 1px solid #e2e8f0;
+        border-radius: 50px;
+        background: white;
+        color: #475569;
+        font-size: 12px;
+        font-weight: 700;
+        transition: 0.2s;
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: white;
+      }
+
+      .product-card {
+        height: 100%;
+        overflow: hidden;
+        border: 1px solid #e8eaf0;
+        border-radius: 15px;
+        background: white;
+        transition: 0.25s;
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
+      }
+
+      .product-image {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 225px;
+        overflow: hidden;
+        background: #f1f5f9;
+      }
+
+      .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s;
+      }
+
+      .product-card:hover .product-image img {
+        transform: scale(1.05);
+      }
+
+      .product-label {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        z-index: 2;
+        padding: 6px 9px;
+        border-radius: 6px;
+        background: #dcfce7;
+        color: #166534;
+        font-size: 10px;
+        font-weight: 800;
+      }
+
+      .product-label.sale {
+        background: #ffedd5;
+        color: #9a3412;
+      }
+
+      .wishlist-btn {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 37px;
+        height: 37px;
+        border: 1px solid #e5e7eb;
+        border-radius: 50%;
+        background: white;
+        color: #475569;
+        font-size: 17px;
+        transition: 0.2s;
+      }
+
+      .wishlist-btn:hover,
+      .wishlist-btn.active {
+        color: #ef4444;
+        border-color: #fecaca;
+      }
+
+      .product-info {
+        padding: 17px;
+      }
+
+      .product-category {
+        display: block;
+        color: var(--primary);
+        font-size: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        margin-bottom: 8px;
+      }
+
+      .product-name {
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 1.4;
+        min-height: 44px;
+        margin-bottom: 8px;
+        color: var(--dark);
+      }
+
+      .product-specs {
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.8;
+        min-height: 40px;
+        margin-bottom: 12px;
+      }
+
+      .product-rating {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #f59e0b;
+        font-size: 13px;
+        margin-bottom: 14px;
+      }
+
+      .product-rating small {
+        color: var(--muted);
+        font-size: 11px;
+      }
+
+      .product-price-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 15px;
+      }
+
+      .product-price {
+        font-size: 20px;
+        font-weight: 900;
+        color: var(--dark);
+      }
+
+      .old-price {
+        margin-left: 5px;
+        font-size: 11px;
+        color: #94a3b8;
+        text-decoration: line-through;
+      }
+
+      .discount-text {
+        color: #15803d;
+        font-size: 10px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      .add-cart-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        padding: 11px;
+        border: 1px solid #d9ddf7;
+        border-radius: 8px;
+        background: #eef2ff;
+        color: var(--primary);
+        font-size: 12px;
+        font-weight: 800;
+        transition: 0.2s;
+      }
+
+      .add-cart-btn:hover {
+        color: white;
+        border-color: var(--primary);
+        background: var(--primary);
+      }
+
+      .no-products {
+        padding: 40px 15px;
+        text-align: center;
+        color: var(--muted);
+      }
+      .promo-section {
+        padding: 25px 0 75px;
+        background: var(--light-bg);
+      }
+
+      .promo-banner {
+        position: relative;
+        overflow: hidden;
+        padding: 45px;
+        border-radius: 22px;
+        color: white;
+        background: linear-gradient(120deg, #312e81, #4f46e5 60%, #818cf8);
+      }
+
+      .promo-banner::after {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        right: -80px;
+        top: -100px;
+        border: 45px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+      }
+
+      .promo-banner h2 {
+        position: relative;
+        z-index: 1;
+        max-width: 600px;
+        font-size: clamp(27px, 4vw, 40px);
+        font-weight: 900;
+        letter-spacing: -1px;
+        margin-bottom: 12px;
+      }
+
+      .promo-banner p {
+        position: relative;
+        z-index: 1;
+        max-width: 570px;
+        color: #e0e7ff;
+        line-height: 1.8;
+        margin-bottom: 23px;
+      }
+
+      .promo-banner .primary-btn {
+        position: relative;
+        z-index: 2;
+        color: var(--primary);
+        background: white;
+        border-color: white;
+      }
+
+      .promo-banner .primary-btn:hover {
+        background: #eef2ff;
+      }
+
+      .newsletter-section {
+        padding: 55px 0;
+        background: #ffffff;
+        border-top: 1px solid var(--border);
+      }
+
+      .newsletter-content {
+        max-width: 600px;
+        margin: auto;
+        text-align: center;
+      }
+
+      .newsletter-content h2 {
+        font-size: 27px;
+        font-weight: 900;
+        margin-bottom: 10px;
+      }
+
+      .newsletter-content p {
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.7;
+        margin-bottom: 22px;
+      }
+
+      .newsletter-form {
+        display: flex;
+        gap: 10px;
+        max-width: 480px;
+        margin: auto;
+      }
+
+      .newsletter-form input {
+        flex: 1;
+        min-width: 0;
+        border: 1px solid #dbe0e8;
+        border-radius: 9px;
+        padding: 13px;
+        outline: none;
+      }
+
+      .newsletter-form input:focus {
+        border-color: var(--primary);
+      }
+      .main-footer {
+        background: #111827;
+        color: white;
+        padding: 60px 0 0;
+      }
+
+      .footer-brand {
+        color: white;
+        margin-bottom: 17px;
+      }
+
+      .footer-brand:hover {
+        color: #c7d2fe;
+      }
+
+      .footer-description {
+        max-width: 300px;
+        color: #9ca3af;
+        font-size: 13px;
+        line-height: 1.9;
+        margin: 17px 0;
+      }
+
+      .footer-heading {
+        font-size: 14px;
+        font-weight: 800;
+        margin-bottom: 20px;
+      }
+
+      .footer-links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .footer-links li {
+        margin-bottom: 13px;
+      }
+
+      .footer-links a {
+        color: #9ca3af;
+        font-size: 12px;
+        transition: 0.2s;
+      }
+
+      .footer-links a:hover {
+        color: white;
+        padding-left: 4px;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 37px;
+        height: 37px;
+        border: 1px solid #374151;
+        border-radius: 9px;
+        color: #d1d5db;
+        transition: 0.2s;
+      }
+
+      .social-links a:hover {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+      }
+
+      .footer-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 45px;
+        padding: 22px 0;
+        border-top: 1px solid #374151;
+        color: #9ca3af;
+        font-size: 11px;
+      }
+
+      .payment-methods {
+        display: flex;
+        gap: 12px;
+        font-size: 22px;
+        color: #d1d5db;
+      }
+
+      .toast-message {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        z-index: 2000;
+        max-width: calc(100vw - 40px);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 15px 20px;
+        border-radius: 12px;
+        color: white;
+        background: #166534;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        transform: translateY(15px);
+        pointer-events: none;
+        transition: 0.25s;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .toast-message.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @media (max-width: 991px) {
+        .navbar-collapse {
+          padding-top: 15px;
+        }
+
+        .navbar-nav {
+          margin-bottom: 15px;
+        }
+
+        .header-actions {
+          padding-bottom: 10px;
+          flex-wrap: wrap;
+        }
+
+        .hero-section {
+          padding: 45px 0;
+        }
+
+        .hero-image-card img {
+          height: 330px;
+        }
+
+        .benefit-item {
+          justify-content: flex-start;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .section-padding {
+          padding: 50px 0;
+        }
+
+        .hero-section {
+          padding: 40px 0 30px;
+        }
+
+        .hero-title {
+          letter-spacing: -1.5px;
+        }
+
+        .hero-description {
+          font-size: 14px;
+        }
+
+        .hero-image-wrapper {
+          margin-top: 30px;
+          padding: 15px;
+        }
+
+        .hero-image-card img {
+          height: 270px;
+        }
+
+        .benefit-item {
+          padding: 16px 5px;
+        }
+
+        .benefit-icon {
+          width: 39px;
+          height: 39px;
+          font-size: 18px;
+        }
+
+        .benefit-item strong {
+          font-size: 11px;
+        }
+
+        .benefit-item small {
+          font-size: 10px;
+        }
+
+        .product-image {
+          height: 180px;
+        }
+
+        .product-info {
+          padding: 12px;
+        }
+
+        .product-name {
+          font-size: 14px;
+        }
+
+        .product-price {
+          font-size: 17px;
+        }
+
+        .old-price {
+          display: block;
+          margin: 3px 0 0;
+        }
+
+        .discount-text {
+          font-size: 9px;
+        }
+
+        .promo-banner {
+          padding: 30px 22px;
+        }
+
+        .newsletter-form {
+          flex-direction: column;
+        }
+
+        .newsletter-form button {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 420px) {
+        .brand-logo {
+          font-size: 21px;
+        }
+
+        .brand-icon {
+          width: 37px;
+          height: 37px;
+          font-size: 20px;
+        }
+
+        .hero-title {
+          font-size: 36px;
+        }
+
+        .product-image {
+          height: 145px;
+        }
+
+        .product-info {
+          padding: 10px;
+        }
+
+        .product-price-row {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .discount-text {
+          font-size: 10px;
+        }
+
+        .add-cart-btn {
+          font-size: 11px;
+          padding: 9px 5px;
+        }
+
+        .product-specs {
+          font-size: 10px;
+        }
+
+        .product-name {
+          min-height: 39px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="announcement-bar">
+      <i class="bi bi-lightning-charge-fill"></i>
+      Special Tech Sale — <strong>Save up to 25%</strong> on selected laptops
+    </div>
+    <header class="main-header">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="brand-logo" href="#home" aria-label="Shopcart home">
+            <span class="brand-icon">
+              <i class="bi bi-laptop"></i>
+            </span>
+
+            <span>Shop<span>cart</span></span>
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item">
+                <a class="nav-link active" href="#home">Home</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="#categories">Categories</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="#products">Laptops</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="#accessories">Accessories</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="#about">About</a>
+              </li>
+            </ul>
+
+            <div class="header-actions">
+              <button
+                type="button"
+                class="header-icon-btn"
+                id="searchToggle"
+                aria-label="Search products"
+                title="Search products"
+              >
+                <i class="bi bi-search"></i>
+              </button>
+
+              <a
+                href="#products"
+                class="header-icon-btn"
+                aria-label="Shopping cart"
+                title="Shopping cart"
+              >
+                <i class="bi bi-bag"></i>
+                <span class="cart-count" id="cartCount">0</span>
+              </a>
+
+              <a href="login.html" class="login-link"> Login </a>
+
+              <a href="register.html" class="signup-btn"> Sign Up </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero-section" id="home">
+        <div class="container">
+          <div class="row align-items-center g-4">
+            <!-- Hero Text -->
+
+            <div class="col-lg-6">
+              <div class="hero-content">
+                <div class="hero-badge">
+                  <i class="bi bi-stars"></i>
+                  YOUR NEXT-GEN TECH DESTINATION
+                </div>
+
+                <h1 class="hero-title">
+                  Power Your<br />
+                  Ideas With<br />
+                  <span class="highlight">The Right Laptop.</span>
+                </h1>
+
+                <p class="hero-description">
+                  Discover powerful laptops for gaming, work, creativity and
+                  everyday life. Find your perfect device at a price you'll
+                  love.
+                </p>
+
+                <div class="hero-buttons">
+                  <a href="#products" class="primary-btn">
+                    Shop Laptops
+                    <i class="bi bi-arrow-right"></i>
+                  </a>
+
+                  <a href="#categories" class="outline-btn">
+                    Explore Categories
+                  </a>
+                </div>
+
+                <div class="hero-trust">
+                  <span>
+                    <i class="bi bi-check-circle-fill"></i>
+                    Quality Products
+                  </span>
+
+                  <span>
+                    <i class="bi bi-truck"></i>
+                    Fast Delivery
+                  </span>
+
+                  <span>
+                    <i class="bi bi-shield-check"></i>
+                    Secure Shopping
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hero Image -->
+
+            <div class="col-lg-6">
+              <div class="hero-image-wrapper">
+                <div class="hero-image-card">
+                  <img
+                    src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=1000&q=85"
+                    alt="Modern laptop on a desk"
+                    fetchpriority="high"
+                  />
+                </div>
+
+                <div class="floating-discount">
+                  UP TO
+                  <strong>25%</strong>
+                  OFF
+                </div>
+
+                <div class="floating-price">
+                  <small>Upgrade your setup</small>
+                  <strong>Starting ₹39,999</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="benefits-strip" id="about">
+        <div class="container">
+          <div class="row">
+            <div class="col-6 col-lg-3">
+              <div class="benefit-item">
+                <div class="benefit-icon">
+                  <i class="bi bi-truck"></i>
+                </div>
+
+                <div>
+                  <strong>Free Delivery</strong>
+                  <small>On eligible orders</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+              <div class="benefit-item">
+                <div class="benefit-icon">
+                  <i class="bi bi-shield-check"></i>
+                </div>
+
+                <div>
+                  <strong>Secure Payment</strong>
+                  <small>Shop with confidence</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+              <div class="benefit-item">
+                <div class="benefit-icon">
+                  <i class="bi bi-arrow-repeat"></i>
+                </div>
+
+                <div>
+                  <strong>Easy Returns</strong>
+                  <small>On eligible products</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+              <div class="benefit-item">
+                <div class="benefit-icon">
+                  <i class="bi bi-headset"></i>
+                </div>
+
+                <div>
+                  <strong>Tech Support</strong>
+                  <small>Here to help you</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================
+         CATEGORIES
+    ============================== -->
+
+      <section class="categories-section section-padding" id="categories">
+        <div class="container">
+          <div
+            class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4"
+          >
+            <div>
+              <h2 class="section-heading">Shop By Category</h2>
+
+              <p class="section-description">
+                Find the right technology for your needs.
+              </p>
+            </div>
+
+            <a href="#products" class="outline-btn">
+              View All
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="row g-3">
+            <!-- Gaming -->
+
+            <div class="col-12 col-sm-6 col-lg-3">
+              <a href="#products" class="category-card" data-category="Gaming">
+                <div class="category-icon">
+                  <i class="bi bi-controller"></i>
+                </div>
+
+                <div>
+                  <h3>Gaming</h3>
+                  <p>Performance & power</p>
+                </div>
+
+                <i class="bi bi-arrow-up-right category-arrow"></i>
+              </a>
+            </div>
+
+            <!-- Business -->
+
+            <div class="col-12 col-sm-6 col-lg-3">
+              <a
+                href="#products"
+                class="category-card"
+                data-category="Business"
+              >
+                <div class="category-icon">
+                  <i class="bi bi-briefcase"></i>
+                </div>
+
+                <div>
+                  <h3>Business</h3>
+                  <p>Work smarter</p>
+                </div>
+
+                <i class="bi bi-arrow-up-right category-arrow"></i>
+              </a>
+            </div>
+
+            <!-- Student -->
+
+            <div class="col-12 col-sm-6 col-lg-3">
+              <a href="#products" class="category-card" data-category="Student">
+                <div class="category-icon">
+                  <i class="bi bi-mortarboard"></i>
+                </div>
+
+                <div>
+                  <h3>Student</h3>
+                  <p>Study essentials</p>
+                </div>
+
+                <i class="bi bi-arrow-up-right category-arrow"></i>
+              </a>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-3">
+              <a href="#accessories" class="category-card">
+                <div class="category-icon">
+                  <i class="bi bi-headphones"></i>
+                </div>
+
+                <div>
+                  <h3>Accessories</h3>
+                  <p>Complete your setup</p>
+                </div>
+
+                <i class="bi bi-arrow-up-right category-arrow"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="products-section section-padding" id="products">
+        <div class="container">
+          <div
+            class="d-flex justify-content-between align-items-end flex-wrap gap-3"
+          >
+            <div>
+              <h2 class="section-heading">Featured Laptops</h2>
+
+              <p class="section-description">
+                Great performance. Great prices. Your next laptop is here.
+              </p>
+            </div>
+
+            <span class="text-secondary small">
+              <i class="bi bi-lightning-charge text-warning"></i>
+              Trending picks
+            </span>
+          </div>
+
+          <!-- Search -->
+
+          <div class="row mt-4">
+            <div class="col-12 col-md-6 col-lg-5">
+              <div class="input-group">
+                <span class="input-group-text bg-white">
+                  <i class="bi bi-search"></i>
+                </span>
+
+                <input
+                  type="search"
+                  id="productSearch"
+                  class="form-control py-2"
+                  placeholder="Search laptop by name..."
+                  aria-label="Search laptops"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="product-filters">
+            <button class="filter-btn active" data-filter="All">
+              All Laptops
+            </button>
+
+            <button class="filter-btn" data-filter="Gaming">Gaming</button>
+
+            <button class="filter-btn" data-filter="Business">Business</button>
+
+            <button class="filter-btn" data-filter="Student">Student</button>
+
+            <button class="filter-btn" data-filter="Creator">Creator</button>
+          </div>
+
+          <div class="row g-3" id="productList"></div>
+
+          <div class="no-products d-none" id="noProducts">
+            <i class="bi bi-search fs-1"></i>
+            <h4 class="mt-3 fw-bold">No laptops found</h4>
+            <p>Try another product name or category.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="promo-section" id="accessories">
+        <div class="container">
+          <div class="promo-banner">
+            <h2>
+              Build Your Perfect<br />
+              Work & Gaming Setup.
+            </h2>
+
+            <p>
+              From wireless keyboards and gaming mice to headphones and laptop
+              accessories, find everything you need in one place.
+            </p>
+
+            <a href="#products" class="primary-btn">
+              Explore Products
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="newsletter-section">
+        <div class="container">
+          <div class="newsletter-content">
+            <h2>Stay Ahead of the Tech Curve</h2>
+
+            <p>
+              Get updates about new arrivals, special deals and the latest
+              technology products.
+            </p>
+
+            <form class="newsletter-form" id="newsletterForm">
+              <input
+                type="email"
+                id="newsletterEmail"
+                placeholder="Enter your email address"
+                aria-label="Email address"
+                required
+              />
+
+              <button type="submit" class="primary-btn">
+                Subscribe
+                <i class="bi bi-arrow-right"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="main-footer">
+      <div class="container">
+        <div class="row g-4">
+          <!-- Brand -->
+
+          <div class="col-12 col-md-6 col-lg-4">
+            <a href="#home" class="brand-logo footer-brand">
+              <span class="brand-icon">
+                <i class="bi bi-laptop"></i>
+              </span>
+
+              <span>Shop<span>cart</span></span>
+            </a>
+
+            <p class="footer-description">
+              Your destination for laptops, technology and accessories. Discover
+              reliable products to power your work, study and play.
+            </p>
+
+            <div class="social-links">
+              <a href="#footer" aria-label="Facebook">
+                <i class="bi bi-facebook"></i>
+              </a>
+
+              <a href="#footer" aria-label="Instagram">
+                <i class="bi bi-instagram"></i>
+              </a>
+
+              <a href="#footer" aria-label="LinkedIn">
+                <i class="bi bi-linkedin"></i>
+              </a>
+
+              <a href="#footer" aria-label="YouTube">
+                <i class="bi bi-youtube"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-3 col-lg-2">
+            <h3 class="footer-heading">Shop</h3>
+
+            <ul class="footer-links">
+              <li><a href="#products">All Laptops</a></li>
+
+              <li><a href="#categories">Gaming Laptops</a></li>
+
+              <li><a href="#categories">Business Laptops</a></li>
+
+              <li><a href="#accessories">Accessories</a></li>
+
+              <li><a href="#products">Featured Deals</a></li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-md-3 col-lg-2">
+            <h3 class="footer-heading">Company</h3>
+
+            <ul class="footer-links">
+              <li><a href="#about">About Us</a></li>
+
+              <li><a href="#about">Why Shopcart</a></li>
+
+              <li><a href="#about">Our Services</a></li>
+
+              <li><a href="#home">Home</a></li>
+
+              <li><a href="register.html">Create Account</a></li>
+            </ul>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-4">
+            <h3 class="footer-heading">Customer Support</h3>
+
+            <ul class="footer-links">
+              <li>
+                <a href="#footer">
+                  <i class="bi bi-question-circle me-2"></i>
+                  Help Center
+                </a>
+              </li>
+
+              <li>
+                <a href="#footer">
+                  <i class="bi bi-truck me-2"></i>
+                  Shipping Information
+                </a>
+              </li>
+
+              <li>
+                <a href="#footer">
+                  <i class="bi bi-arrow-return-left me-2"></i>
+                  Returns & Refunds
+                </a>
+              </li>
+
+              <li>
+                <a href="#footer">
+                  <i class="bi bi-shield-check me-2"></i>
+                  Privacy Policy
+                </a>
+              </li>
+
+              <li>
+                <a href="mailto:support@example.com">
+                  <i class="bi bi-envelope me-2"></i>
+                  Contact Support
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Footer Bottom -->
+
+        <div class="footer-bottom" id="footer">
+          <p class="mb-0">
+            &copy; <span id="currentYear"></span> Shopcart. All rights reserved.
+          </p>
+
+          <div class="payment-methods" aria-label="Payment methods">
+            <i class="bi bi-credit-card" title="Credit card"></i>
+
+            <i class="bi bi-wallet2" title="Wallet"></i>
+
+            <i class="bi bi-cash-coin" title="Cash"></i>
+
+            <i class="bi bi-shield-lock" title="Secure payment"></i>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div
+      class="toast-message"
+      id="toastMessage"
+      role="status"
+      aria-live="polite"
+    >
+      <i class="bi bi-check-circle-fill fs-5"></i>
+
+      <span id="toastText">Product added to cart!</span>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      const defaultProducts = [
+        {
+          id: "default-1",
+          name: "ASUS TUF Gaming F15",
+          category: "Gaming",
+          price: 74999,
+          oldPrice: 89999,
+          rating: 4.8,
+          reviews: 124,
+          label: "BEST SELLER",
+          specs: "Intel Core i7 • 16GB RAM • 512GB SSD",
+          description: "Powerful laptop for gaming and multitasking.",
+          image:
+            "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=700&q=80",
+        },
+        {
+          id: "default-2",
+          name: "Apple MacBook Air",
+          category: "Business",
+          price: 89999,
+          oldPrice: 99999,
+          rating: 4.9,
+          reviews: 98,
+          label: "POPULAR",
+          specs: "Apple Silicon • 16GB RAM • 512GB SSD",
+          description: "Lightweight laptop for work and everyday use.",
+          image:
+            "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=700&q=80",
+        },
+        {
+          id: "default-3",
+          name: "HP Pavilion 15",
+          category: "Student",
+          price: 52999,
+          oldPrice: 59999,
+          rating: 4.6,
+          reviews: 86,
+          label: "GREAT VALUE",
+          specs: "Intel Core i5 • 16GB RAM • 512GB SSD",
+          description: "A useful laptop for college and everyday tasks.",
+          image:
+            "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=700&q=80",
+        },
+        {
+          id: "default-4",
+          name: "Dell XPS Creator",
+          category: "Creator",
+          price: 119999,
+          oldPrice: 134999,
+          rating: 4.9,
+          reviews: 73,
+          label: "PREMIUM",
+          specs: "Intel Core Ultra • 16GB RAM • 1TB SSD",
+          description: "Premium laptop for creative work.",
+          image:
+            "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=700&q=80",
+        },
+        {
+          id: "default-5",
+          name: "Lenovo LOQ Gaming",
+          category: "Gaming",
+          price: 67999,
+          oldPrice: 77999,
+          rating: 4.7,
+          reviews: 112,
+          label: "HOT DEAL",
+          specs: "AMD Ryzen 7 • 16GB RAM • 512GB SSD",
+          description: "Gaming laptop for performance and entertainment.",
+          image:
+            "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=700&q=80",
+        },
+        {
+          id: "default-6",
+          name: "Lenovo IdeaPad Slim",
+          category: "Student",
+          price: 42999,
+          oldPrice: 48999,
+          rating: 4.5,
+          reviews: 64,
+          label: "STUDENT PICK",
+          specs: "AMD Ryzen 5 • 8GB RAM • 512GB SSD",
+          description: "Everyday laptop for students.",
+          image:
+            "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=700&q=80",
+        },
+        {
+          id: "default-7",
+          name: "HP ProBook 450",
+          category: "Business",
+          price: 64999,
+          oldPrice: 72999,
+          rating: 4.6,
+          reviews: 59,
+          label: "WORK READY",
+          specs: "Intel Core i5 • 16GB RAM • 512GB SSD",
+          description: "Laptop for office and business use.",
+          image:
+            "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=700&q=80",
+        },
+        {
+          id: "default-8",
+          name: "ASUS Vivobook Pro",
+          category: "Creator",
+          price: 84999,
+          oldPrice: 94999,
+          rating: 4.7,
+          reviews: 81,
+          label: "CREATOR PICK",
+          specs: "Intel Core i7 • 16GB RAM • 1TB SSD",
+          description: "Laptop for productivity and creative projects.",
+          image:
+            "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=700&q=80",
+        },
+      ];
+
+      const productList = document.getElementById("productList");
+      const productSearch = document.getElementById("productSearch");
+      const noProducts = document.getElementById("noProducts");
+      const cartCount = document.getElementById("cartCount");
+      const toastMessage = document.getElementById("toastMessage");
+      const toastText = document.getElementById("toastText");
+      const filterButtons = document.querySelectorAll(".filter-btn");
+
+      let allProducts = [];
+      let activeFilter = "All";
+      let toastTimer;
+
+      function loadAddedProducts() {
+        try {
+          const savedProducts = JSON.parse(
+            localStorage.getItem("products") || "[]",
+          );
+
+          if (!Array.isArray(savedProducts)) {
+            return [];
+          }
+
+          return savedProducts
+            .filter(function (product) {
+              return product && typeof product === "object";
+            })
+            .map(function (product, index) {
+              return {
+                id: product.id ?? `added-${index}`,
+
+                name: String(product.name || "Unnamed Product"),
+
+                category: product.category || "Student",
+
+                price: Number(product.price) || 0,
+
+                oldPrice:
+                  Number(product.oldPrice) || Number(product.price) || 0,
+
+                rating: Number(product.rating) || 0,
+
+                reviews: Number(product.reviews) || 0,
+
+                label: product.label || "NEW ARRIVAL",
+
+                specs: product.specs || product.description || "New laptop",
+
+                description: product.description || "No description available.",
+
+                image: product.image || "",
+              };
+            });
+        } catch (error) {
+          console.error("Unable to load saved products:", error);
+          return [];
+        }
+      }
+
+      function loadAllProducts() {
+        const addedProducts = loadAddedProducts();
+
+        allProducts = [...defaultProducts, ...addedProducts];
+
+        filterProducts();
+      }
+
+      function loadCart() {
+        try {
+          const savedCart = JSON.parse(
+            localStorage.getItem("shopcartCart") || "[]",
+          );
+
+          return Array.isArray(savedCart) ? savedCart : [];
+        } catch (error) {
+          console.error("Unable to load cart:", error);
+          return [];
+        }
+      }
+
+      let cart = loadCart();
+
+      function updateCartCount() {
+        const totalItems = cart.reduce(function (total, item) {
+          return total + (Number(item.quantity) || 0);
+        }, 0);
+
+        cartCount.textContent = totalItems;
+      }
+
+      function showToast(message) {
+        toastText.textContent = message;
+
+        toastMessage.classList.add("show");
+
+        clearTimeout(toastTimer);
+
+        toastTimer = setTimeout(function () {
+          toastMessage.classList.remove("show");
+        }, 2500);
+      }
+
+      function displayProducts(products) {
+        productList.replaceChildren();
+
+        if (products.length === 0) {
+          noProducts.classList.remove("d-none");
+          return;
+        }
+
+        noProducts.classList.add("d-none");
+
+        products.forEach(function (product) {
+          const column = document.createElement("div");
+          column.className = "col-6 col-md-4 col-lg-3";
+
+          const card = document.createElement("article");
+          card.className = "product-card";
+
+          const imageBox = document.createElement("div");
+          imageBox.className = "product-image";
+
+          const image = document.createElement("img");
+          image.src = product.image;
+          image.alt = product.name;
+          image.loading = "lazy";
+
+          image.onerror = function () {
+            image.onerror = null;
+            image.src =
+              "https://placehold.co/600x400/f1f5f9/475569?text=No+Image";
+          };
+
+          const label = document.createElement("span");
+          label.className = "product-label";
+
+          if (product.label === "HOT DEAL") {
+            label.classList.add("sale");
+          }
+
+          label.textContent = product.label;
+
+          const wishlistButton = document.createElement("button");
+          wishlistButton.type = "button";
+          wishlistButton.className = "wishlist-btn";
+          wishlistButton.setAttribute("aria-label", "Add to wishlist");
+
+          const heartIcon = document.createElement("i");
+          heartIcon.className = "bi bi-heart";
+
+          wishlistButton.appendChild(heartIcon);
+
+          imageBox.append(image, label, wishlistButton);
+
+          const info = document.createElement("div");
+          info.className = "product-info";
+
+          const category = document.createElement("span");
+          category.className = "product-category";
+          category.textContent = product.category + " Laptop";
+
+          const name = document.createElement("h3");
+          name.className = "product-name";
+          name.textContent = product.name;
+
+          const specs = document.createElement("p");
+          specs.className = "product-specs";
+          specs.textContent = product.specs;
+
+          const rating = document.createElement("div");
+          rating.className = "product-rating";
+
+          const stars = document.createElement("span");
+          const ratingValue = Math.max(0, Math.min(5, product.rating));
+
+          stars.textContent =
+            "★".repeat(Math.floor(ratingValue)) +
+            "☆".repeat(5 - Math.floor(ratingValue));
+
+          const ratingText = document.createElement("small");
+          ratingText.textContent =
+            product.rating.toFixed(1) + " (" + product.reviews + ")";
+
+          rating.append(stars, ratingText);
+
+          const priceRow = document.createElement("div");
+          priceRow.className = "product-price-row";
+
+          const priceGroup = document.createElement("div");
+
+          const price = document.createElement("span");
+          price.className = "product-price";
+          price.textContent = "₹" + product.price.toLocaleString("en-IN");
+
+          priceGroup.appendChild(price);
+
+          if (product.oldPrice > product.price) {
+            const oldPrice = document.createElement("span");
+            oldPrice.className = "old-price";
+            oldPrice.textContent =
+              "₹" + product.oldPrice.toLocaleString("en-IN");
+
+            priceGroup.appendChild(oldPrice);
+          }
+
+          const discountText = document.createElement("span");
+          discountText.className = "discount-text";
+
+          const discount =
+            product.oldPrice > product.price
+              ? Math.round((1 - product.price / product.oldPrice) * 100)
+              : 0;
+
+          discountText.textContent = discount > 0 ? discount + "% OFF" : "NEW";
+
+          priceRow.append(priceGroup, discountText);
+          const addButton = document.createElement("button");
+          addButton.type = "button";
+          addButton.className = "add-cart-btn";
+          addButton.innerHTML = '<i class="bi bi-bag-plus"></i> Add to Cart';
+
+          wishlistButton.addEventListener("click", function () {
+            const isActive = wishlistButton.classList.toggle("active");
+
+            heartIcon.className = isActive ? "bi bi-heart-fill" : "bi bi-heart";
+
+            wishlistButton.setAttribute(
+              "aria-label",
+              isActive ? "Remove from wishlist" : "Add to wishlist",
+            );
+
+            showToast(
+              isActive
+                ? product.name + " added to wishlist!"
+                : product.name + " removed from wishlist!",
+            );
+          });
+
+          addButton.addEventListener("click", function () {
+            const existingItem = cart.find(function (item) {
+              return String(item.id) === String(product.id);
+            });
+
+            if (existingItem) {
+              existingItem.quantity += 1;
+            } else {
+              cart.push({
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                image: product.image,
+                quantity: 1,
+              });
+            }
+
+            try {
+              localStorage.setItem("shopcartCart", JSON.stringify(cart));
+            } catch (error) {
+              showToast("Unable to save cart in browser storage.");
+              return;
+            }
+
+            updateCartCount();
+
+            addButton.innerHTML =
+              '<i class="bi bi-check-circle-fill"></i> Added to Cart';
+
+            showToast(product.name + " added to cart!");
+
+            setTimeout(function () {
+              addButton.innerHTML =
+                '<i class="bi bi-bag-plus"></i> Add to Cart';
+            }, 1500);
+          });
+
+          info.append(category, name, specs, rating, priceRow, addButton);
+
+          card.append(imageBox, info);
+          column.appendChild(card);
+          productList.appendChild(column);
+        });
+      }
+
+      function filterProducts() {
+        const searchValue = productSearch.value.trim().toLowerCase();
+
+        const filteredProducts = allProducts.filter(function (product) {
+          const matchesCategory =
+            activeFilter === "All" || product.category === activeFilter;
+
+          const searchableText = (
+            product.name +
+            " " +
+            product.category +
+            " " +
+            product.specs +
+            " " +
+            product.description
+          ).toLowerCase();
+
+          const matchesSearch = searchableText.includes(searchValue);
+
+          return matchesCategory && matchesSearch;
+        });
+
+        displayProducts(filteredProducts);
+      }
+
+      productSearch.addEventListener("input", filterProducts);
+
+      filterButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          filterButtons.forEach(function (item) {
+            item.classList.remove("active");
+          });
+
+          button.classList.add("active");
+
+          activeFilter = button.dataset.filter;
+
+          filterProducts();
+        });
+      });
+
+      document
+        .querySelectorAll(".category-card[data-category]")
+        .forEach(function (categoryCard) {
+          categoryCard.addEventListener("click", function () {
+            activeFilter = categoryCard.dataset.category;
+
+            filterButtons.forEach(function (button) {
+              button.classList.toggle(
+                "active",
+                button.dataset.filter === activeFilter,
+              );
+            });
+
+            productSearch.value = "";
+
+            filterProducts();
+          });
+        });
+
+      document
+        .getElementById("searchToggle")
+        .addEventListener("click", function () {
+          document.getElementById("products").scrollIntoView({
+            behavior: "smooth",
+          });
+
+          setTimeout(function () {
+            productSearch.focus();
+          }, 400);
+        });
+
+      document
+        .getElementById("newsletterForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const email = document.getElementById("newsletterEmail").value.trim();
+
+          if (!email) {
+            return;
+          }
+
+          showToast("Thanks for subscribing!");
+
+          this.reset();
+        });
+
+      document.getElementById("currentYear").textContent =
+        new Date().getFullYear();
+
+      loadAllProducts();
+
+      updateCartCount();
+    </script>
+  </body>
+</html>
